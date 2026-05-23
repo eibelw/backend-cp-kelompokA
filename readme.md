@@ -1,8 +1,9 @@
-# Struktur Proyek
+# Backend Capstone Project Kelompok A
+
+## Struktur Proyek
 
 ```
 backend/
-├── server.js                      ← Entry point
 ├── .env / .env.example            ← Konfigurasi
 ├── uploads/photos/ & documents/   ← Storage foto & surat
 └── src/
