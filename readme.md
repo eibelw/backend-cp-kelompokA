@@ -82,8 +82,8 @@ backend/
 
 # Cara Menjalankan
 
-1. Isi .env — ganti ```DB_PASSWORD``` dengan password PostgreSQL kamu
-2. Buat database: ```CREATE DATABASE capstone_kelompok_A;``` di psql
+1. Isi .env — ganti ```DB_PASSWORD``` dengan password PostgreSQL
+2. Buat database: ```CREATE DATABASE capstone_kelompok_A;``` PostgreSQL
 3. Jalankan migrasi: ```node src/database/migrate.js```
 4. Seed data awal: ```node src/database/seed.js```
 5. Jalankan server: ```npm run dev```
@@ -91,4 +91,3 @@ backend/
 ---
 > Login default setelah seed:
 > - Admin: admin@perusahaan.com / admin123
->  - Employee: budi@perusahaan.com / employee123
