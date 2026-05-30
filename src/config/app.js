@@ -9,18 +9,19 @@ const penangananKesalahan = require('../middlewares/penangananKesalahan');
 
 const aplikasi = express();
 
-// Keamanan HTTP headers
-aplikasi.use(helmet());
-
-// Izinkan permintaan lintas domain dari frontend
+// CORS harus sebelum helmet agar header Access-Control-Allow-Origin
+// selalu ada, termasuk pada response error dari server
 aplikasi.use(cors({
   origin: [
-    'https://absensi-frontend.vercel.app',
+    'https://cp-sistem-absensi.vercel.app',
     'http://localhost:5173',
     'http://localhost:8100',
   ],
   credentials: true,
 }));
+
+// Keamanan HTTP headers
+aplikasi.use(helmet());
 
 // Log permintaan HTTP
 aplikasi.use(morgan(process.env.NODE_ENV === 'production' ? 'combined' : 'dev'));
