@@ -1,7 +1,6 @@
 const jwt = require('jsonwebtoken');
-const path = require('path');
-const fs = require('fs');
 const RepositoriPengguna = require('../repositories/RepositoriPengguna');
+const { supabase, BUCKET } = require('../middlewares/unggah');
 
 // Layanan otentikasi: login, refresh token, dan ubah kata sandi
 class LayananOtentikasi {
@@ -63,13 +62,14 @@ class LayananOtentikasi {
     const pengguna = await RepositoriPengguna.cariPerIdDenganKataSandi(idPengguna);
     if (!pengguna) throw { statusCode: 404, message: 'Pengguna tidak ditemukan' };
 
-    // Hapus foto lama jika ada
+    // Hapus foto lama dari Supabase jika ada
     if (pengguna.urlFoto) {
-      const pathLama = path.join(process.cwd(), pengguna.urlFoto.replace(/^\//, ''));
-      if (fs.existsSync(pathLama)) fs.unlinkSync(pathLama);
+      const jalurLama = new URL(pengguna.urlFoto).pathname
+        .split(`/storage/v1/object/public/${BUCKET}/`)[1];
+      if (jalurLama) await supabase.storage.from(BUCKET).remove([jalurLama]);
     }
 
-    const urlFoto = `/uploads/photos/${fileFoto.filename}`;
+    const urlFoto = fileFoto.supabaseUrl;
     await RepositoriPengguna.perbarui(idPengguna, { urlFoto });
     return { urlFoto };
   }

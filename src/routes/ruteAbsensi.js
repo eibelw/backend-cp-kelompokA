@@ -11,7 +11,7 @@ router.use(autentikasi);
 // POST /api/v1/absensi/masuk — Absen masuk dengan foto selfie dan koordinat GPS
 router.post(
   '/masuk',
-  unggahFoto.single('foto'),
+  unggahFoto,
   [
     body('latitude').isFloat({ min: -90, max: 90 }).withMessage('Latitude tidak valid'),
     body('longitude').isFloat({ min: -180, max: 180 }).withMessage('Longitude tidak valid'),

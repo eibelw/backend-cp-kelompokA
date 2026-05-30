@@ -37,7 +37,7 @@ class LayananAbsensi {
 
     if (!fileFoto) throw { statusCode: 400, message: 'Foto selfie wajib diunggah' };
 
-    const urlFoto = `/uploads/photos/${fileFoto.filename}`;
+    const urlFoto = fileFoto.supabaseUrl;
     const sekarang = new Date();
 
     // Hitung keterlambatan berdasarkan jam masuk kerja

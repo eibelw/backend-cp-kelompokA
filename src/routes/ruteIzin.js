@@ -11,7 +11,7 @@ router.use(autentikasi);
 // POST /api/v1/izin — Ajukan permohonan izin atau sakit
 router.post(
   '/',
-  unggahDokumen.single('dokumen'),
+  unggahDokumen,
   [
     body('jenisIzin').isIn(['izin', 'sakit']).withMessage('Jenis izin harus: izin atau sakit'),
     body('tanggalMulai').isDate().withMessage('Tanggal mulai tidak valid'),
