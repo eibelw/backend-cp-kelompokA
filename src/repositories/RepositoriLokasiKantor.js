@@ -24,8 +24,8 @@ class RepositoriLokasiKantor {
   }
 
   async perbarui(id, data) {
-    await LokasiKantor.update(data, { where: { id } });
-    return LokasiKantor.findByPk(id);
+    const [, baris] = await LokasiKantor.update(data, { where: { id }, returning: true });
+    return baris[0] || null;
   }
 
   async hapus(id) {

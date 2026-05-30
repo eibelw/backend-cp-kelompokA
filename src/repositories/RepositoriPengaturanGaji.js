@@ -47,8 +47,8 @@ class RepositoriPengaturanGaji {
   }
 
   async perbarui(id, data) {
-    await PengaturanGaji.update(data, { where: { id } });
-    return this.cariPerId(id);
+    const [, baris] = await PengaturanGaji.update(data, { where: { id }, returning: true });
+    return baris[0] || null;
   }
 
   async hapus(id) {

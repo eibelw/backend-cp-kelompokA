@@ -54,8 +54,8 @@ class RepositoriSlipGaji {
   }
 
   async perbarui(id, data) {
-    await SlipGaji.update(data, { where: { id } });
-    return this.cariPerId(id);
+    const [, baris] = await SlipGaji.update(data, { where: { id }, returning: true });
+    return baris[0] || null;
   }
 }
 

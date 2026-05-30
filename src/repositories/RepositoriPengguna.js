@@ -8,9 +8,9 @@ class RepositoriPengguna {
 
     if (cari) {
       kondisi[Op.or] = [
-        { nama: { [Op.like]: `%${cari}%` } },
-        { email: { [Op.like]: `%${cari}%` } },
-        { idPegawai: { [Op.like]: `%${cari}%` } },
+        { nama: { [Op.iLike]: `%${cari}%` } },
+        { email: { [Op.iLike]: `%${cari}%` } },
+        { idPegawai: { [Op.iLike]: `%${cari}%` } },
       ];
     }
     if (departemen) kondisi.departemen = departemen;
@@ -53,8 +53,8 @@ class RepositoriPengguna {
   }
 
   async perbarui(id, data) {
-    await Pengguna.update(data, { where: { id } });
-    return Pengguna.findByPk(id, { attributes: { exclude: ['kataSandi'] } });
+    const [, baris] = await Pengguna.update(data, { where: { id }, returning: true });
+    return baris[0] || null;
   }
 
   async hapus(id) {

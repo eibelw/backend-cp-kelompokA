@@ -66,8 +66,8 @@ class RepositoriAbsensi {
   }
 
   async perbarui(id, data) {
-    await Absensi.update(data, { where: { id } });
-    return this.cariPerId(id);
+    const [, baris] = await Absensi.update(data, { where: { id }, returning: true });
+    return baris[0] || null;
   }
 }
 

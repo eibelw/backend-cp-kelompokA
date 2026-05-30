@@ -31,7 +31,7 @@ router.post(
 );
 
 // PUT /api/v1/otentikasi/profil/foto — Unggah foto profil pengguna
-router.put('/profil/foto', autentikasi, unggahFoto.single('foto'), KontrolerOtentikasi.unggahFotoProfil);
+router.put('/profil/foto', autentikasi, unggahFoto, KontrolerOtentikasi.unggahFotoProfil);
 
 // PUT /api/v1/otentikasi/ubah-kata-sandi — Ubah kata sandi pengguna
 router.put(

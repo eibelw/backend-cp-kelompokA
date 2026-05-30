@@ -5,3 +5,4 @@ uploads/documents/*
 !uploads/photos/.gitkeep
 !uploads/documents/.gitkeep
 *.log
+supabase/

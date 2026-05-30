@@ -57,8 +57,8 @@ class RepositoriIzin {
   }
 
   async perbarui(id, data) {
-    await Izin.update(data, { where: { id } });
-    return this.cariPerId(id);
+    const [, baris] = await Izin.update(data, { where: { id }, returning: true });
+    return baris[0] || null;
   }
 
   async hapus(id) {
