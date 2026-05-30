@@ -12,8 +12,15 @@ const aplikasi = express();
 // Keamanan HTTP headers
 aplikasi.use(helmet());
 
-// Izinkan permintaan lintas domain
-aplikasi.use(cors());
+// Izinkan permintaan lintas domain dari frontend
+aplikasi.use(cors({
+  origin: [
+    'https://absensi-frontend.vercel.app',
+    'http://localhost:5173',
+    'http://localhost:8100',
+  ],
+  credentials: true,
+}));
 
 // Log permintaan HTTP
 aplikasi.use(morgan(process.env.NODE_ENV === 'production' ? 'combined' : 'dev'));
