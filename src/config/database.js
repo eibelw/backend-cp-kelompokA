@@ -1,4 +1,6 @@
 const { Sequelize } = require('sequelize');
+// Import eksplisit agar bundler Vercel menyertakan pg dalam deployment
+require('pg');
 
 // Konfigurasi koneksi ke database PostgreSQL
 const basisData = new Sequelize(
