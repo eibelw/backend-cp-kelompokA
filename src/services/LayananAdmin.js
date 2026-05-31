@@ -40,6 +40,12 @@ class LayananAdmin {
   async perbaruiPengguna(id, data) {
     const pengguna = await RepositoriPengguna.cariPerId(id);
     if (!pengguna) throw { statusCode: 404, message: 'Pengguna tidak ditemukan' };
+
+    if (data.email && data.email !== pengguna.email) {
+      const emailSudahAda = await RepositoriPengguna.cariPerEmail(data.email);
+      if (emailSudahAda) throw { statusCode: 409, message: 'Email sudah digunakan oleh pengguna lain' };
+    }
+
     return RepositoriPengguna.perbarui(id, data);
   }
 

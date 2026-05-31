@@ -13,7 +13,7 @@ router.post(
   '/',
   unggahDokumen,
   [
-    body('jenisIzin').isIn(['izin', 'sakit']).withMessage('Jenis izin harus: izin atau sakit'),
+    body('jenisIzin').isIn(['izin', 'sakit', 'cuti']).withMessage('Jenis izin harus: izin, sakit, atau cuti'),
     body('tanggalMulai').isDate().withMessage('Tanggal mulai tidak valid'),
     body('tanggalSelesai').isDate().withMessage('Tanggal selesai tidak valid'),
     body('alasan').notEmpty().withMessage('Alasan wajib diisi'),

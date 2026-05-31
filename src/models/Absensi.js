@@ -63,7 +63,7 @@ module.exports = (basisData) => {
         comment: 'Durasi keterlambatan dalam menit (0 = tepat waktu)',
       },
       status: {
-        type: DataTypes.ENUM('hadir', 'izin', 'sakit', 'alpa'),
+        type: DataTypes.ENUM('hadir', 'izin', 'sakit', 'alpa', 'cuti'),
         allowNull: false,
         defaultValue: 'hadir',
         comment: 'Status kehadiran pegawai pada hari tersebut',

@@ -14,7 +14,7 @@ class LayananIzin {
       throw { statusCode: 400, message: 'Tidak bisa mengajukan izin untuk tanggal yang sudah lewat' };
     }
 
-    const urlDokumen = fileDokumen ? `/uploads/documents/${fileDokumen.filename}` : null;
+    const urlDokumen = fileDokumen?.supabaseUrl ?? null;
 
     const izin = await RepositoriIzin.buat({
       idPengguna,

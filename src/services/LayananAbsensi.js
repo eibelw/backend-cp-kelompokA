@@ -40,12 +40,19 @@ class LayananAbsensi {
     const urlFoto = fileFoto.supabaseUrl;
     const sekarang = new Date();
 
-    // Hitung keterlambatan berdasarkan jam masuk kerja
+    // Hitung keterlambatan menggunakan jam WIB (bukan UTC server Vercel)
+    const bagianWIB = new Intl.DateTimeFormat('en-US', {
+      timeZone: 'Asia/Jakarta',
+      hour: 'numeric', minute: 'numeric', hour12: false,
+    }).formatToParts(sekarang);
+    const jamWIB = parseInt(bagianWIB.find(p => p.type === 'hour').value.replace('24', '0'));
+    const menitWIB = parseInt(bagianWIB.find(p => p.type === 'minute').value);
+
     const [jamMulai, menitMulai] = (process.env.CHECK_IN_START || '08:00').split(':').map(Number);
-    const batasWaktu = new Date(sekarang);
-    batasWaktu.setHours(jamMulai, menitMulai, 0, 0);
-    const keterlambatan = sekarang > batasWaktu
-      ? Math.floor((sekarang - batasWaktu) / 60000)
+    const menitSekarangTotal = jamWIB * 60 + menitWIB;
+    const menitMulaiTotal = jamMulai * 60 + menitMulai;
+    const keterlambatan = menitSekarangTotal > menitMulaiTotal
+      ? menitSekarangTotal - menitMulaiTotal
       : 0;
 
     const absensi = await RepositoriAbsensi.buat({
